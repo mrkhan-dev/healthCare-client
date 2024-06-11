@@ -3,7 +3,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <h1 className="text-7xl ">Hello Health Hub</h1>
+      <h1 className="text-7xl text-center font-Lora">Hello Health Hub</h1>
     </>
   );
 }
