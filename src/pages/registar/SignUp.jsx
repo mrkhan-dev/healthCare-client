@@ -1,10 +1,17 @@
 import {useState} from "react";
 import {useForm} from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const SignUp = () => {
   const [passError, setPassError] = useState();
   const [pass, setPass] = useState();
   const [confirmPass, setConfirmPass] = useState();
+  const {createUser, updateUserProfile} = useAuth();
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -15,15 +22,7 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    const {
-      name,
-      email,
-      password,
-      confirmPassword,
-      bloodGroup,
-      district,
-      upazila,
-    } = data;
+    const {name, email, password, bloodGroup, district, upazila} = data;
 
     if (password.length < 6) {
       setPassError("Password must be 6 character or longer");
@@ -39,6 +38,26 @@ const SignUp = () => {
       setPassError("Password not match");
     }
     setPassError("");
+    createUser(email, password)
+      .then(() => {
+        updateUserProfile(name, bloodGroup, district, upazila);
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(location.state || "/");
+      })
+      .catch(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
+      });
   };
 
   const password = watch("password", "");
