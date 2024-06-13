@@ -8,7 +8,7 @@ const Nav = () => {
         <NavLink
           className={({isActive}) =>
             isActive
-              ? "text-lg font-semibold px-5 py-3 text-[#5DBA28] underline"
+              ? "text-lg font-semibold px-5 py-3 text-[#00F515] underline"
               : "text-lg font-semibold px-5 py-3"
           }
           to="/"
@@ -20,7 +20,7 @@ const Nav = () => {
         <NavLink
           className={({isActive}) =>
             isActive
-              ? "text-lg font-semibold px-5 py-3 text-[#5DBA28] underline"
+              ? "text-lg font-semibold px-5 py-3 text-[#00F515] underline"
               : "text-lg font-semibold px-5 py-3"
           }
           to="allTests"
@@ -74,11 +74,11 @@ const Nav = () => {
             </li>
           </ul>
         </div>
-        <div className="flex gap-6">
-          <img className="h-10 w-10" src={logo} alt="" />
+        <div className="flex md:gap-6 gap-2">
+          <img className="md:h-10 md:w-10 h-6 w-6" src={logo} alt="" />
           <Link to="/">
-            <p className="text-4xl font-Lora font-medium">
-              <span className="text-[#7DD447]">Health</span>
+            <p className="md:text-3xl text-xl font-Lora font-medium">
+              <span className="text-[#00F515]">Health</span>
               <span>Hub</span>{" "}
             </p>
           </Link>
@@ -88,7 +88,11 @@ const Nav = () => {
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
       </div>
       <div>
-        <a className="btn bg-[#7bff2a]  font-Lora text-lg">Sign Up</a>
+        <Link to="signUp">
+          <button className="btn text-lg font-semibold px-5 bg-[#00F515] text-[#112A46] font-Lora hover:bg-emerald-500">
+            Login
+          </button>
+        </Link>
       </div>
     </div>
   );
