@@ -1,15 +1,47 @@
+import {useState} from "react";
 import {useForm} from "react-hook-form";
 
 const SignUp = () => {
+  const [passError, setPassError] = useState();
+  const [pass, setPass] = useState();
+  const [confirmPass, setConfirmPass] = useState();
+
   const {
     register,
     handleSubmit,
+    watch,
     formState: {errors},
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
+    const {
+      name,
+      email,
+      password,
+      confirmPassword,
+      bloodGroup,
+      district,
+      upazila,
+    } = data;
+
+    if (password.length < 6) {
+      setPassError("Password must be 6 character or longer");
+      return;
+    } else if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-_=+[\]{}\\|;:'",.<>?/]).{6,}$/.test(
+        password
+      )
+    ) {
+      setPassError("password must be uppercase, lowercase & special character");
+      return;
+    } else if (pass !== confirmPass) {
+      setPassError("Password not match");
+    }
+    setPassError("");
   };
+
+  const password = watch("password", "");
 
   return (
     <div className="flex justify-center items-center max-w-7xl mx-auto">
@@ -73,7 +105,6 @@ const SignUp = () => {
             </div>
             <div className="form-control mt-2">
               <label className="block">Image</label>
-
               <input
                 type="file"
                 className="block w-full px-3 py-2 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full"
@@ -84,7 +115,9 @@ const SignUp = () => {
                 <span className="text-lg text-gray-600">Blood Group</span>
               </label>
               <select
+                {...register("bloodGroup", {required: true})}
                 defaultValue="default"
+                name="bloodGroup"
                 className="select select-bordered w-full text-lg text-gray-400"
               >
                 <option disabled value="default" className="text-gray-50">
@@ -106,22 +139,34 @@ const SignUp = () => {
                   <span className="text-lg text-gray-600">District</span>
                 </label>
                 <input
-                  type="password"
-                  name="password"
+                  type="text"
+                  name="district"
                   placeholder="Password"
                   className="input input-bordered"
+                  {...register("district", {required: true})}
                 />
+                {errors.district && (
+                  <span className="text-[#FF900E] text-sm mt-1 ml-1">
+                    This field is required!
+                  </span>
+                )}
               </div>
               <div className="form-control mt-2 w-full">
                 <label className="label">
                   <span className="text-lg text-gray-600">Upazila</span>
                 </label>
                 <input
-                  type="password"
-                  name="password"
+                  type="text"
+                  name="upazila"
                   placeholder="Password"
                   className="input input-bordered"
+                  {...register("upazila", {required: true})}
                 />
+                {errors.upazila && (
+                  <span className="text-[#FF900E] text-sm mt-1 ml-1">
+                    This field is required!
+                  </span>
+                )}
               </div>
             </div>
             <div className="form-control mt-2">
@@ -131,9 +176,17 @@ const SignUp = () => {
               <input
                 type="password"
                 name="password"
+                value={pass}
+                onChange={setPass}
                 placeholder="Password"
                 className="input input-bordered"
+                {...register("password", {required: true})}
               />
+              {errors.password && (
+                <span className="text-[#FF900E] text-sm mt-1 ml-1">
+                  This field is required!
+                </span>
+              )}
             </div>
             <div className="form-control mt-2">
               <label className="label">
@@ -141,10 +194,20 @@ const SignUp = () => {
               </label>
               <input
                 type="password"
-                name="password"
+                value={confirmPass}
+                onChange={setConfirmPass}
+                name="confirmPassword"
                 placeholder="Password"
                 className="input input-bordered"
+                {...register("confirmPassword", {
+                  required: "Please confirm your password",
+                  validate: (value) =>
+                    value === password || "The passwords do not match",
+                })}
               />
+              {errors.confirmPassword && (
+                <p style={{color: "red"}}>{errors.confirmPassword.message}</p>
+              )}
             </div>
             <div className="form-control mt-6">
               <button className="btn bg-[#00F515] text-[#112A46]">
@@ -152,7 +215,11 @@ const SignUp = () => {
               </button>
             </div>
           </form>
-          <p className="text-center text-sm mt-2 text-[#FF900E] mb-3"></p>
+          {passError && (
+            <p className="text-center text-sm mt-2 text-red mb-3">
+              {passError}
+            </p>
+          )}
 
           <div className="text-lg mt-8 text-right  text-gray-500 ">
             <p>Already have an account?</p>

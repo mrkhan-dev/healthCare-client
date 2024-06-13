@@ -90,7 +90,7 @@ const Nav = () => {
       <div>
         <Link to="signUp">
           <button className="btn text-lg font-semibold px-5 bg-[#00F515] text-[#112A46] font-Lora hover:bg-emerald-500">
-            Login
+            login
           </button>
         </Link>
       </div>
