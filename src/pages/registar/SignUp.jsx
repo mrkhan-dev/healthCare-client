@@ -79,11 +79,11 @@ const SignUp = () => {
                 {...register("name", {required: true})}
               />
               {errors.name && (
-                <span className="text-[#FF900E] text-sm mt-1 ml-1">
+                <span className="text-red-500 text-base mt-1 ml-1">
                   This field is required!
                 </span>
               )}
-              <span className="text-[#FF900E] text-sm mt-1 ml-1"></span>
+              <span className="text-red-500 text-base mt-1 ml-1"></span>
             </div>
             <div className="form-control mt-2">
               <label className="label">
@@ -97,11 +97,11 @@ const SignUp = () => {
                 {...register("email", {required: true})}
               />
               {errors.email && (
-                <span className="text-[#FF900E] text-sm mt-1 ml-1">
+                <span className="text-red-500 text-base mt-1 ml-1">
                   This field is required!
                 </span>
               )}
-              <span className="text-[#FF900E] text-sm mt-1 ml-1"></span>
+              <span className="text-red-500 text-base mt-1 ml-1"></span>
             </div>
             <div className="form-control mt-2">
               <label className="block">Image</label>
@@ -146,7 +146,7 @@ const SignUp = () => {
                   {...register("district", {required: true})}
                 />
                 {errors.district && (
-                  <span className="text-[#FF900E] text-sm mt-1 ml-1">
+                  <span className="text-red-500 text-base mt-1 ml-1">
                     This field is required!
                   </span>
                 )}
@@ -163,7 +163,7 @@ const SignUp = () => {
                   {...register("upazila", {required: true})}
                 />
                 {errors.upazila && (
-                  <span className="text-[#FF900E] text-sm mt-1 ml-1">
+                  <span className="text-red-500 text-base mt-1 ml-1">
                     This field is required!
                   </span>
                 )}
@@ -183,7 +183,7 @@ const SignUp = () => {
                 {...register("password", {required: true})}
               />
               {errors.password && (
-                <span className="text-[#FF900E] text-sm mt-1 ml-1">
+                <span className="text-red-500 text-base mt-1 ml-1">
                   This field is required!
                 </span>
               )}
@@ -216,7 +216,7 @@ const SignUp = () => {
             </div>
           </form>
           {passError && (
-            <p className="text-center text-sm mt-2 text-red mb-3">
+            <p className="text-center text-sm mt-2 text-red-500 mb-3">
               {passError}
             </p>
           )}
