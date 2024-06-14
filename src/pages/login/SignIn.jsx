@@ -1,6 +1,6 @@
 import {useForm} from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
-import {useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import Swal from "sweetalert2";
 
 const SignIn = () => {
@@ -108,7 +108,12 @@ const SignIn = () => {
             </div>
           </form>
           <div className="text-lg mt-8 text-right  text-gray-500 ">
-            <p>Already have an account?</p>
+            <p>
+              New to this Website?{" "}
+              <Link className="text-[#00F515]" to="/signUp">
+                Sign Up
+              </Link>{" "}
+            </p>
           </div>
         </div>
       </div>

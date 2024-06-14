@@ -1,3 +1,4 @@
+import Banner from "../../components/Banner/Banner";
 import Nav from "../../shared/Nav";
 
 const Home = () => {
@@ -6,7 +7,7 @@ const Home = () => {
       <div className="h-20">
         <Nav />
       </div>
-      <h1 className="text-4xl text-center font-Lora">Homepage</h1>
+      <Banner />
     </div>
   );
 };

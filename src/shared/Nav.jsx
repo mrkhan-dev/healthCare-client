@@ -113,16 +113,17 @@ const Nav = () => {
             >
               <li>
                 <p className="text-base">Dashboard</p>
+                <hr />
               </li>
               <li>
-                <p onClick={handleLogout} className="text-base mt-4">
+                <p onClick={handleLogout} className="text-base">
                   Log Out
                 </p>
               </li>
             </ul>
           </div>
         ) : (
-          <Link to="signUp">
+          <Link to="signIn">
             <button className="btn text-lg font-semibold px-5 bg-[#00F515] text-[#112A46] font-Lora hover:bg-emerald-500">
               login
             </button>
