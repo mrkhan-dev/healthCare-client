@@ -1,7 +1,24 @@
 import {Link, NavLink} from "react-router-dom";
 import logo from "../assets/supplementary-food_7850889.png";
+import {LuUserCircle} from "react-icons/lu";
+import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Nav = () => {
+  const {user, logOut} = useAuth();
+
+  const handleLogout = () => {
+    logOut().then(() => {
+      Swal.fire({
+        position: "top-center",
+        icon: "success",
+        title: "Log Out Successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    });
+  };
+
   const navLink = (
     <>
       <li>
@@ -55,23 +72,7 @@ const Nav = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            {navLink}
           </ul>
         </div>
         <div className="flex md:gap-6 gap-2">
@@ -88,11 +89,45 @@ const Nav = () => {
         <ul className="menu menu-horizontal px-1">{navLink}</ul>
       </div>
       <div>
-        <Link to="signUp">
-          <button className="btn text-lg font-semibold px-5 bg-[#00F515] text-[#112A46] font-Lora hover:bg-emerald-500">
-            login
-          </button>
-        </Link>
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                {user.photoURL ? (
+                  <img
+                    className="h-12 w-12 rounded-full flex justify-center items-center"
+                    src={user.photoURL}
+                  />
+                ) : (
+                  <LuUserCircle className="h-full w-full" />
+                )}
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <p className="text-base">Dashboard</p>
+              </li>
+              <li>
+                <p onClick={handleLogout} className="text-base mt-4">
+                  Log Out
+                </p>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Link to="signUp">
+            <button className="btn text-lg font-semibold px-5 bg-[#00F515] text-[#112A46] font-Lora hover:bg-emerald-500">
+              login
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );
