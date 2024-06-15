@@ -97,7 +97,7 @@ const Banner = () => {
           </div>
         </SwiperSlide>
       </Swiper>
-      <button>kdkd</button>
+      {/* <button>kdkd</button> */}
     </div>
   );
 };
