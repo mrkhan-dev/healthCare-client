@@ -90,7 +90,7 @@ const Nav = () => {
       </div>
       <div>
         {user ? (
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end ml-24 lg:ml-0">
             <div
               tabIndex={0}
               role="button"
@@ -112,7 +112,9 @@ const Nav = () => {
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <p className="text-base">Dashboard</p>
+                <Link to="/dashboard">
+                  <p className="text-base">Dashboard</p>
+                </Link>
                 <hr />
               </li>
               <li>
@@ -124,7 +126,7 @@ const Nav = () => {
           </div>
         ) : (
           <Link to="signIn">
-            <button className="btn text-lg font-semibold px-5 bg-[#00F515] text-[#112A46] font-Lora hover:bg-emerald-500">
+            <button className="btn text-lg ml-20 lg:ml-0 font-semibold px-5 bg-[#00F515] text-[#112A46] font-Lora hover:bg-emerald-500">
               login
             </button>
           </Link>

@@ -30,7 +30,7 @@ const Banner = () => {
         <SwiperSlide>
           <div className="md:h-[600px] h-auto">
             <div className="h-full flex flex-col md:flex-row justify-between md:gap-2 gap-10 items-center">
-              <div className="flex-1 ml-40 mt-10 md:mt-0 w-full md:w-auto">
+              <div className="flex-1 lg:ml-40 mt-10 md:mt-0 w-full md:w-auto">
                 <p className="xl:text-[50px] lg:text-[40px] md:text-[32px] text-[30px] font-bold text-center md:text-left">
                   Landscape Painting
                 </p>
@@ -53,7 +53,7 @@ const Banner = () => {
         <SwiperSlide>
           <div className="md:h-[600px] h-auto">
             <div className="h-full flex flex-col md:flex-row justify-between md:gap-2 gap-10 items-center">
-              <div className="flex-1 ml-40 mt-10 md:mt-0 w-full md:w-auto">
+              <div className="flex-1 lg:ml-40 mt-10 md:mt-0 w-full md:w-auto">
                 <p className="xl:text-[50px] lg:text-[40px] md:text-[32px] text-[30px] font-bold text-center md:text-left">
                   Landscape Painting
                 </p>
@@ -76,7 +76,7 @@ const Banner = () => {
         <SwiperSlide>
           <div className="md:h-[600px] h-auto">
             <div className="h-full flex flex-col md:flex-row justify-between md:gap-2 gap-10 items-center">
-              <div className="flex-1 ml-40 mt-10 md:mt-0 w-full md:w-auto">
+              <div className="flex-1 lg:ml-40 mt-10 md:mt-0 w-full md:w-auto">
                 <p className="xl:text-[50px] lg:text-[40px] md:text-[32px] text-[30px] font-bold text-center md:text-left">
                   Landscape Painting
                 </p>

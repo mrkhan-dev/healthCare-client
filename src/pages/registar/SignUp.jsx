@@ -3,12 +3,14 @@ import {useForm} from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import {useLocation, useNavigate} from "react-router-dom";
+import UseAxiosPublic from "../../hooks/UseAxiosPublic";
 
 const SignUp = () => {
   const [passError, setPassError] = useState();
   const [pass, setPass] = useState();
   const [confirmPass, setConfirmPass] = useState();
   const {createUser, updateUserProfile} = useAuth();
+  const axiosPublic = UseAxiosPublic();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,15 +42,28 @@ const SignUp = () => {
     setPassError("");
     createUser(email, password)
       .then(() => {
-        updateUserProfile(name, bloodGroup, district, upazila);
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "Your work has been saved",
-          showConfirmButton: false,
-          timer: 1500,
+        updateUserProfile(name);
+        const userInfo = {
+          name: name,
+          email: email,
+          bloodGroup: bloodGroup,
+          district: district,
+          upazila: upazila,
+          password: password,
+        };
+        axiosPublic.post("/userInfo", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            console.log("user info save to database");
+            Swal.fire({
+              position: "top-center",
+              icon: "success",
+              title: "Your work has been saved",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate(location.state || "/dashboard/userProfile");
+          }
         });
-        navigate(location.state || "/");
       })
       .catch(() => {
         Swal.fire({
