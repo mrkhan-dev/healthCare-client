@@ -1,9 +1,12 @@
 import {useQuery} from "@tanstack/react-query";
 import UseAxiosSecure from "../../../hooks/UseAxiosSecure";
+import {FaUsersGear} from "react-icons/fa6";
+import Swal from "sweetalert2";
+import {GrUserAdmin} from "react-icons/gr";
 
 const AllUsers = () => {
   const axiosSecure = UseAxiosSecure();
-  const {data: users = []} = useQuery({
+  const {refetch, data: users = []} = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
@@ -11,14 +14,47 @@ const AllUsers = () => {
     },
   });
 
+  const handleRole = (user) => {
+    axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+      refetch();
+    });
+  };
+
+  // handle user status
+  const handleUserStatus = (user) => {
+    axiosSecure.patch(`/users/status/${user._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch();
+      }
+    });
+  };
+
   return (
     <div>
       <h2 className="text-4xl text-center font-Lora font-medium text-gray-800">
         Manage Users
       </h2>
       <section className="container px-4 mx-auto">
-        <div className="flex items-center gap-x-3">
-          Total Users:{users.length}
+        <div className="flex items-center text-lg font-Lora gap-x-3">
+          Total Users: {users.length}
         </div>
         <div className="flex flex-col mt-6">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -27,6 +63,7 @@ const AllUsers = () => {
                 <table className="min-w-full divide-y divide-gray-200 ">
                   <thead className="bg-gray-50">
                     <tr>
+                      <th className=""></th>
                       <th
                         scope="col"
                         className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 "
@@ -108,59 +145,104 @@ const AllUsers = () => {
                       >
                         Teams
                       </th>
-
-                      <th scope="col" className="relative py-3.5 px-4">
-                        <span className="sr-only">Edit</span>
-                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    <tr>
-                      <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                        <div className="inline-flex items-center gap-x-3">
-                          <div className="flex items-center gap-x-2">
-                            <img
-                              className="object-cover w-10 h-10 rounded-full"
-                              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                              alt=""
-                            />
-                            <div>
-                              <h2 className="font-medium text-gray-800 ">
-                                Arthur Melo
-                              </h2>
-                              <p className="text-sm font-normal text-gray-600 ">
-                                @authurmelo
-                              </p>
+                    {users.map((user, i) => (
+                      <tr key={user._id}>
+                        <td>
+                          <h2 className="font-medium px-5 text-gray-800 ">
+                            {i + 1}
+                          </h2>
+                        </td>
+                        <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                          <div className="inline-flex items-center gap-x-3">
+                            <div className="flex items-center gap-x-2">
+                              <img
+                                className="object-cover w-10 h-10 rounded-full"
+                                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+                                alt=""
+                              />
+                              <div>
+                                <h2 className="font-medium text-gray-800 ">
+                                  {user.name}
+                                </h2>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                      <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
-                        <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60">
-                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                        </td>
+                        <td className="px-12 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                          <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60">
+                            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
 
-                          <h2 className="text-sm font-normal text-emerald-500">
-                            Active
-                          </h2>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                        Design Director
-                      </td>
-                      <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                        authurmelo@example.com
-                      </td>
-                      <td className="px-4 py-4 text-sm whitespace-nowrap">
-                        <div className="flex items-center gap-x-2">
-                          <p className="px-3 py-1 text-xs text-indigo-500 rounded-full  bg-indigo-100/60">
-                            Details
-                          </p>
-                          <p className="px-3 py-1 text-xs text-blue-500 rounded-full  bg-blue-100/60">
-                            Download
-                          </p>
-                        </div>
-                      </td>
-                    </tr>
+                            {user.status === "block" ? (
+                              <p className="text-sm font-normal text-red-500 bg-red-100/60 w-full rounded-full">
+                                Blocked
+                              </p>
+                            ) : (
+                              <button
+                                onClick={() => {
+                                  handleUserStatus(user);
+                                }}
+                                className="text-sm font-normal text-emerald-500"
+                              >
+                                Active
+                              </button>
+                            )}
+                          </div>
+                        </td>
+                        <td className="px-4 py-4 text-2xl text-gray-500  whitespace-nowrap">
+                          {user.role === "admin" ? (
+                            <GrUserAdmin />
+                          ) : (
+                            <button onClick={() => handleRole(user)}>
+                              <FaUsersGear />
+                            </button>
+                          )}
+                        </td>
+                        <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
+                          {user.email}
+                        </td>
+                        <td className="px-4 py-4 text-sm whitespace-nowrap">
+                          <div className="flex items-center gap-x-2">
+                            {/* Open the modal using document.getElementById('ID').showModal() method */}
+                            <button
+                              className="px-3 py-1 text-xs text-blue-500 rounded-full  bg-blue-100/60"
+                              onClick={() =>
+                                document
+                                  .getElementById("my_modal_1")
+                                  .showModal()
+                              }
+                            >
+                              Details
+                            </button>
+                            <dialog id="my_modal_1" className="modal">
+                              <div className="modal-box">
+                                <h3 className="font-bold font-Lora text-lg">
+                                  {user.name}
+                                </h3>
+                                <p className="text-base font-Lora">
+                                  {user.email}{" "}
+                                </p>
+                                <p className="py-4">
+                                  Press ESC key or click the button below to
+                                  close
+                                </p>
+                                <div className="modal-action">
+                                  <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button className="btn">Close</button>
+                                  </form>
+                                </div>
+                              </div>
+                            </dialog>
+                            <p className="px-3 py-1 text-xs text-blue-500 rounded-full  bg-blue-100/60">
+                              Download
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
