@@ -9,6 +9,8 @@ import AllUsers from "../pages/Dashboard/allUsers/AllUsers";
 import AllTest from "../pages/allTests/AllTest";
 import AddTest from "../pages/Dashboard/addTest/AddTest";
 import TestDetails from "../pages/allTests/TestDetails";
+import MangeAllTest from "../pages/Dashboard/MangeTest/MangeAllTest";
+import UpdateTest from "../pages/Dashboard/MangeTest/UpdateTest";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
       {
         path: "addTest",
         element: <AddTest />,
+      },
+      {
+        path: "mangeAllTest",
+        element: <MangeAllTest />,
+      },
+      {
+        path: "updateTest/:id",
+        element: <UpdateTest />,
       },
     ],
   },
