@@ -3,10 +3,15 @@ import UseAxiosSecure from "../../../hooks/UseAxiosSecure";
 import {FaUsersGear} from "react-icons/fa6";
 import Swal from "sweetalert2";
 import {GrUserAdmin} from "react-icons/gr";
+import {RotatingLines} from "react-loader-spinner";
 
 const AllUsers = () => {
   const axiosSecure = UseAxiosSecure();
-  const {refetch, data: users = []} = useQuery({
+  const {
+    refetch,
+    data: users = [],
+    isLoading,
+  } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
@@ -29,6 +34,24 @@ const AllUsers = () => {
       refetch();
     });
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center mt-96">
+        <RotatingLines
+          visible={true}
+          height="96"
+          width="96"
+          color="grey"
+          strokeWidth="5"
+          animationDuration="0.75"
+          ariaLabel="rotating-lines-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      </div>
+    );
+  }
 
   // handle user status
   const handleUserStatus = (user) => {
