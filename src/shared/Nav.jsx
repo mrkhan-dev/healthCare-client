@@ -40,7 +40,7 @@ const Nav = () => {
               ? "text-lg font-semibold px-5 py-3 text-[#00F515] underline"
               : "text-lg font-semibold px-5 py-3"
           }
-          to="allTests"
+          to="/allTests"
         >
           All Tests
         </NavLink>

@@ -6,6 +6,8 @@ import SignIn from "../pages/login/SignIn";
 import Dashboard from "../layout/Dashboard";
 import UserProfile from "../pages/Dashboard/UserProfile";
 import AllUsers from "../pages/Dashboard/allUsers/AllUsers";
+import AllTest from "../pages/allTests/AllTest";
+import AddTest from "../pages/Dashboard/addTest/AddTest";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,10 @@ const router = createBrowserRouter([
         path: "signIn",
         element: <SignIn />,
       },
+      {
+        path: "allTests",
+        element: <AllTest />,
+      },
     ],
   },
   {
@@ -37,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "allUsers",
         element: <AllUsers />,
+      },
+      {
+        path: "addTest",
+        element: <AddTest />,
       },
     ],
   },
