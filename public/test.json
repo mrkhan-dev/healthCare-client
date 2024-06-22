@@ -5,7 +5,7 @@
     "slots": 2,
     "price": 30,
     "testName": "Blood Test",
-    "short_description": "Complete Blood Count"
+    "descriptions": "Complete Blood Count"
   },
   {
     "image": "https://i.ibb.co/crC6WmC/doctor-pointing-x-ray-with-patient-23-2148285686.jpg",
@@ -13,7 +13,7 @@
     "slots": 6,
     "price": 50,
     "testName": "X-Ray",
-    "short_description": "Chest X-Ray"
+    "descriptions": "Chest X-Ray"
   },
   {
     "image": "https://i.ibb.co/LrLgx7B/doctor-with-clipboard-his-hand-looking-brain-big-monitor-confident-doctor-doctor-uniform-482257-3459.jpg",
@@ -21,7 +21,7 @@
     "slots": 4,
     "price": 70,
     "testName": "MRI",
-    "short_description": "Brain MRI"
+    "descriptions": "Brain MRI"
   },
   {
     "image": "https://i.ibb.co/MB48Cd3/diagnostician-holding-hand-positive-hiv-test-blue-laboratory-background-431724-11226.jpg",
@@ -29,7 +29,7 @@
     "slots": 3,
     "price": 60,
     "testName": "hIV",
-    "short_description": "HIV Test"
+    "descriptions": "HIV Test"
   },
   {
     "image": "https://i.ibb.co/WxC5SGG/arabian-doctor-with-injection-hepatitis-word-175634-18639.jpg",
@@ -37,6 +37,6 @@
     "slots": 5,
     "price": 100,
     "testName": "MRI",
-    "short_description": "Hepatitis Panel"
+    "descriptions": "Hepatitis Panel"
   }
 ]

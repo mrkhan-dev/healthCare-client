@@ -21,7 +21,7 @@ const AllUsers = () => {
 
   const handleRole = (user) => {
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
-      console.log(res.data);
+      res.data;
       if (res.data.modifiedCount > 0) {
         Swal.fire({
           position: "top-end",
@@ -56,7 +56,7 @@ const AllUsers = () => {
   // handle user status
   const handleUserStatus = (user) => {
     axiosSecure.patch(`/users/status/${user._id}`).then((res) => {
-      console.log(res.data);
+      res.data;
       if (res.data.modifiedCount > 0) {
         Swal.fire({
           position: "top-center",
@@ -237,7 +237,7 @@ const AllUsers = () => {
                                   .showModal()
                               }
                             >
-                              Details
+                              See Info
                             </button>
                             <dialog id="my_modal_1" className="modal">
                               <div className="modal-box">

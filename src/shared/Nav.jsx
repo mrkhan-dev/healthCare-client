@@ -3,9 +3,11 @@ import logo from "../assets/supplementary-food_7850889.png";
 import {LuUserCircle} from "react-icons/lu";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
+import UseAdmin from "../hooks/UseAdmin";
 
 const Nav = () => {
   const {user, logOut} = useAuth();
+  const [isAdmin] = UseAdmin();
 
   const handleLogout = () => {
     logOut().then(() => {
@@ -112,10 +114,21 @@ const Nav = () => {
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link to="/dashboard">
-                  <p className="text-base">Dashboard</p>
-                </Link>
-                <hr />
+                {isAdmin ? (
+                  <>
+                    <Link to="/dashboard/allUsers">
+                      <p className="text-base">Dashboard</p>
+                    </Link>
+                    <hr />
+                  </>
+                ) : (
+                  <>
+                    <Link to="/dashboard/userProfile">
+                      <p className="text-base">Dashboard</p>
+                    </Link>
+                    <hr />
+                  </>
+                )}
               </li>
               <li>
                 <p onClick={handleLogout} className="text-base">

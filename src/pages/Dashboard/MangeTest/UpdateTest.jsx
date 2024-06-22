@@ -36,12 +36,12 @@ const UpdateTest = () => {
       slots,
       descriptions,
     };
-    console.log(testData);
+    testData;
     axiosPublic
       .put(`/updateTest/${id}`, testData)
       .then((res) => {
         if (res.data.modifiedCount > 0) {
-          console.log("added test to the database");
+          ("added test to the database");
           Swal.fire({
             position: "top-center",
             icon: "success",
@@ -52,7 +52,7 @@ const UpdateTest = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        err;
       });
   };
 
@@ -114,6 +114,7 @@ const UpdateTest = () => {
             <label className="text-gray-700">Short Descriptions</label>
             <textarea
               name="descriptions"
+              defaultValue={testInfo.descriptions}
               className="block w-full lg:h-44  px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md  focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
             ></textarea>
           </div>

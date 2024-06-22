@@ -23,7 +23,7 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    data;
     const {name, email, password, bloodGroup, district, upazila} = data;
 
     if (password.length < 6) {
@@ -53,7 +53,7 @@ const SignUp = () => {
         };
         axiosPublic.post("/userInfo", userInfo).then((res) => {
           if (res.data.insertedId) {
-            console.log("user info save to database");
+            ("user info save to database");
             Swal.fire({
               position: "top-center",
               icon: "success",

@@ -27,12 +27,12 @@ const AddTest = () => {
       slots,
       descriptions,
     };
-    console.log(testData);
+    testData;
     axiosPublic
       .post("/addTest", testData)
       .then((res) => {
         if (res.data.insertedId) {
-          console.log("added test to the database");
+          ("added test to the database");
           Swal.fire({
             position: "top-center",
             icon: "success",
@@ -43,7 +43,7 @@ const AddTest = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        err;
       });
   };
 
