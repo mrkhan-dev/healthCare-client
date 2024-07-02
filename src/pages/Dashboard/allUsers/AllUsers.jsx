@@ -4,6 +4,7 @@ import {FaUsersGear} from "react-icons/fa6";
 import Swal from "sweetalert2";
 import {GrUserAdmin} from "react-icons/gr";
 import {RotatingLines} from "react-loader-spinner";
+import {Link} from "react-router-dom";
 
 const AllUsers = () => {
   const axiosSecure = UseAxiosSecure();
@@ -229,39 +230,11 @@ const AllUsers = () => {
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center gap-x-2">
                             {/* Open the modal using document.getElementById('ID').showModal() method */}
-                            <button
-                              className="px-3 py-1 text-xs text-blue-500 rounded-full  bg-blue-100/60"
-                              onClick={() =>
-                                document
-                                  .getElementById("my_modal_1")
-                                  .showModal()
-                              }
-                            >
-                              See Info
-                            </button>
-                            <dialog id="my_modal_1" className="modal">
-                              <div className="modal-box">
-                                <h3 className="font-bold font-Lora text-lg">
-                                  {user.name}
-                                </h3>
-                                <p className="text-base font-Lora">
-                                  {user.email}{" "}
-                                </p>
-                                <p className="py-4">
-                                  Press ESC key or click the button below to
-                                  close
-                                </p>
-                                <div className="modal-action">
-                                  <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
-                                    <button className="btn">Close</button>
-                                  </form>
-                                </div>
-                              </div>
-                            </dialog>
-                            <p className="px-3 py-1 text-xs text-blue-500 rounded-full  bg-blue-100/60">
-                              Download
-                            </p>
+                            <Link to={`/seeUserInfo/${user._id}`}>
+                              <button className="px-3 py-1 text-xs text-blue-500 rounded-full  bg-blue-100/60">
+                                See Info
+                              </button>
+                            </Link>
                           </div>
                         </td>
                       </tr>

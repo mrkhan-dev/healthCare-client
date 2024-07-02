@@ -12,6 +12,10 @@ import TestDetails from "../pages/allTests/TestDetails";
 import MangeAllTest from "../pages/Dashboard/MangeTest/MangeAllTest";
 import UpdateTest from "../pages/Dashboard/MangeTest/UpdateTest";
 import UpcomingAppoinment from "../pages/Dashboard/UpcomingAppoinment";
+import SeeUserInfo from "../pages/Dashboard/allUsers/SeeUserInfo";
+import AddBanner from "../pages/Dashboard/AddBanner/AddBanner";
+import PrivetRoute from "./PrivetRoute";
+import AllBanner from "../pages/Dashboard/AllBanner/AllBanner";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +40,17 @@ const router = createBrowserRouter([
       },
       {
         path: "testDetails/:id",
-        element: <TestDetails />,
+        element: (
+          <PrivetRoute>
+            <TestDetails />
+          </PrivetRoute>
+        ),
+      },
+      {
+        path: "seeUserInfo/:id",
+        element: <SeeUserInfo />,
+        // loader: ({params}) =>
+        //   fetch(`https://health-hub-server-dusky.vercel.app/userInfo/${params.id}`),
       },
     ],
   },
@@ -56,6 +70,7 @@ const router = createBrowserRouter([
         path: "allUsers",
         element: <AllUsers />,
       },
+
       {
         path: "addTest",
         element: <AddTest />,
@@ -67,6 +82,14 @@ const router = createBrowserRouter([
       {
         path: "updateTest/:id",
         element: <UpdateTest />,
+      },
+      {
+        path: "addBanner",
+        element: <AddBanner />,
+      },
+      {
+        path: "allBanner",
+        element: <AllBanner />,
       },
     ],
   },

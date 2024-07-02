@@ -5,6 +5,9 @@ import Swal from "sweetalert2";
 import {useLocation, useNavigate} from "react-router-dom";
 import UseAxiosPublic from "../../hooks/UseAxiosPublic";
 
+const image_hosting_key = import.meta.env.VITE_IMGBB_APIKEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 const SignUp = () => {
   const [passError, setPassError] = useState();
   const [pass, setPass] = useState();
@@ -22,9 +25,18 @@ const SignUp = () => {
     formState: {errors},
   } = useForm();
 
-  const onSubmit = (data) => {
-    data;
+  const onSubmit = async (data) => {
     const {name, email, password, bloodGroup, district, upazila} = data;
+    console.log(data);
+
+    const imageFile = {image: data.image[0]};
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    const image = res.data.data.display_url;
+    console.log(image);
 
     if (password.length < 6) {
       setPassError("Password must be 6 character or longer");
@@ -40,12 +52,14 @@ const SignUp = () => {
       setPassError("Password not match");
     }
     setPassError("");
-    createUser(email, password)
+
+    createUser(email, password, image)
       .then(() => {
         updateUserProfile(name);
         const userInfo = {
           name: name,
           email: email,
+          image: image,
           bloodGroup: bloodGroup,
           district: district,
           upazila: upazila,
@@ -140,8 +154,10 @@ const SignUp = () => {
             <div className="form-control mt-2">
               <label className="block">Image</label>
               <input
+                name="image"
                 type="file"
                 className="block w-full px-3 py-2 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full"
+                {...register("image", {required: true})}
               />
             </div>
             <div className="form-control mt-2">

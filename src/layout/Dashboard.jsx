@@ -20,8 +20,14 @@ const Dashboard = () => {
                 <NavLink to="/dashboard/mangeAllTest">All Test</NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/reservation">Reservation</NavLink>
+                <NavLink to="/dashboard/addBanner">Add Banner</NavLink>
               </li>
+              <li>
+                <NavLink to="/dashboard/allBanner">All Banner</NavLink>
+              </li>
+              {/* <li>
+                <NavLink to="/dashboard/reservation">Reservation</NavLink>
+              </li> */}
             </ul>
           </>
         ) : (
@@ -35,9 +41,9 @@ const Dashboard = () => {
                   My Upcoming Appointments
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="/dashboard/userTestResult">Test Result</NavLink>
-              </li>
+              </li> */}
             </ul>
           </>
         )}
